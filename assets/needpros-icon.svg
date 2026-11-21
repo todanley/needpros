@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64.00 64.00" width="512.00" height="512.00" role="img" aria-label="NeedPros">
+  <g transform="translate(0.000 0.000) scale(1.000000)">
+  <rect width="64" height="64" rx="13.5" fill="#1B3152"/>
+  <g transform="translate(-3.1 0.15)" fill="none" stroke="#F6F3EC" stroke-width="6.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- N: up, diagonal, up -->
+    <path d="M17.2 47.4 V16.8 L35.0 47.4 V16.8"/>
+    <!-- P bowl, attached to the shared stem -->
+    <path d="M35.0 16.8 C47.6 16.8 53.2 20.6 53.2 26.7 C53.2 32.9 47.6 36.6 35.0 36.6"/>
+  </g>
+</g>
+</svg>

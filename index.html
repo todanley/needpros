@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NeedPros — hire remote professionals</title>
+  <meta name="description" content="Hire remote professionals for coding, design, writing, admin, marketing, or video. Rates from US$15/hr for most work, and from US$10/hr for admin support. Every new member gets an A$50 cash voucher.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://todanley.github.io/needpros/">
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/needpros-icon-180.png">
+  <meta property="og:title" content="NeedPros — hire remote professionals">
+  <meta property="og:description" content="Send a brief. We quote a rate from US$10–15 an hour, or a fixed price for the job. Every new member gets an A$50 cash voucher.">
+  <meta property="og:image" content="https://todanley.github.io/needpros/assets/needpros-icon-512.png">
+  <meta property="og:url" content="https://todanley.github.io/needpros/">
+  <style>
+    :root {
+      --ink: #162033;
+      --muted: #5A6170;
+      --line: #D5D0C6;
+      --paper: #F6F3EC;
+      --card: #fffdf8;
+      --accent: #1B3152;
+      --pine: #1B3152;
+      --focus: #162033;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.55;
+    }
+    .wrap { width: min(52rem, calc(100% - 2rem)); margin-left: auto; margin-right: auto; }
+    header { padding: 1.15rem 0 1rem; border-bottom: 1px solid var(--line); }
+    .brand-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .logo { display: flex; align-items: center; text-decoration: none; color: inherit; }
+    .logo img { height: 36px; width: auto; display: block; }
+    nav { font-size: 0.92rem; }
+    nav a { color: var(--pine); margin-left: 0.9rem; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    h1, h2, h3 {
+      font-family: Palatino, "Palatino Linotype", "Iowan Old Style", Georgia, serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    h1 { font-size: clamp(2rem, 4.5vw, 2.55rem); margin: 1.7rem 0 0.75rem; }
+    h2 { font-size: 1.55rem; margin: 2.4rem 0 0.8rem; }
+    h3 { font-size: 1.22rem; margin: 0 0 0.35rem; }
+    p { margin: 0.7rem 0; }
+    .lede { font-size: 1.16rem; max-width: 40rem; }
+    .credit {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      padding: 0.95rem 1.05rem;
+      margin: 1.4rem 0 0.4rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+      gap: 0.9rem;
+      margin: 1.15rem 0 0.6rem;
+    }
+    article.cat {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 1.05rem 1.1rem 1.05rem;
+      display: flex;
+      flex-direction: column;
+    }
+    article.cat:target { outline: 2px solid var(--pine); outline-offset: 2px; }
+    .rate { font-weight: 600; color: var(--pine); margin: 0.1rem 0 0.5rem; }
+    article.cat p { flex: 1; }
+    .ask {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-weight: 600;
+      color: var(--pine);
+      text-decoration: none;
+      border-bottom: 1px solid var(--pine);
+    }
+    .ask:hover { color: var(--accent); border-color: var(--accent); }
+    .note, .fine, footer, .src { color: var(--muted); font-size: 0.92rem; }
+    .src a, main a { color: var(--pine); }
+    ol.steps { padding-left: 1.2rem; }
+    ol.steps li { margin: 0.45rem 0; }
+    .faq details { border-top: 1px solid var(--line); padding: 0.7rem 0; }
+    .faq details:last-child { border-bottom: 1px solid var(--line); }
+    .faq summary { cursor: pointer; font-weight: 600; color: var(--ink); }
+    .faq details p { margin: 0.45rem 0 0.2rem; }
+    form {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 1.1rem 1.15rem 1.2rem;
+      margin: 1rem 0 2rem;
+    }
+    label { display: block; font-weight: 600; margin: 0.85rem 0 0.3rem; }
+    .hint { font-weight: 400; color: var(--muted); font-size: 0.9rem; }
+    input, select, textarea {
+      width: 100%;
+      font: inherit;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid #b7b0a5;
+      border-radius: 2px;
+      padding: 0.5rem 0.55rem;
+    }
+    textarea { min-height: 9rem; resize: vertical; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
+    .hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+    button[type="submit"] {
+      margin-top: 1.1rem;
+      font: inherit;
+      font-weight: 600;
+      color: #fff;
+      background: var(--pine);
+      border: 0;
+      padding: 0.65rem 1.1rem;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover { filter: brightness(1.08); }
+    button[type="submit"]:focus { outline: 2px solid var(--focus); outline-offset: 2px; }
+    footer { padding: 2rem 0 2.6rem; border-top: 1px solid var(--line); margin-top: 1rem; }
+    footer p { margin: 0.4rem 0; }
+    @media (max-width: 40rem) {
+      nav a { margin: 0 0.7rem 0 0; }
+      .logo img { height: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap brand-row">
+      <a class="logo" href="#top" aria-label="NeedPros home">
+        <img src="assets/needpros-lockup.svg" width="140" height="36" alt="NeedPros">
+      </a>
+      <nav aria-label="On this page">
+        <a href="#categories">Categories</a>
+        <a href="#how">How it works</a>
+        <a href="#request">Request a job</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+  <main id="top" class="wrap">
+    <h1>Remote professionals at low rates</h1>
+    <p class="lede">Looking for help with coding, design, writing, admin, marketing, or video? Send the brief. We quote a fixed price or an hourly rate before we start.</p>
+    <p>Rates start at US$15 an hour for most of this work, and at US$10 an hour for admin support. In development, design, and writing, those starting rates are often well under typical posted marketplace rates. We don’t claim to be the cheapest in every case. Some jobs will cost more than the starting rate; you’ll see the price on the quote.</p>
+
+    <div class="credit" id="credit">
+      <strong>A$50 cash voucher for new members.</strong>
+      Every new member gets an A$50 cash voucher. One voucher per new customer, used against their first job. We’ll honour it, and we’ll show it on the quote. The voucher is not redeemable for cash, and you can’t transfer it.
+    </div>
+
+    <h2 id="categories">What we take</h2>
+    <p>These are the main remote categories we quote on. Each job has its own price, based on the brief. The figure on each card is a starting point, not a cap.</p>
+
+    <div class="grid">
+      <article class="cat" id="coding">
+        <h3>Looking for a coding professional?</h3>
+        <p class="rate">From US$15/hr</p>
+        <p>Websites, web apps, scripts, WordPress, and small software repairs. Specialist or larger builds are quoted above the starting rate.</p>
+        <a class="ask" href="#request" data-category="coding">Request coding work</a>
+      </article>
+      <article class="cat" id="design">
+        <h3>Looking for a design professional?</h3>
+        <p class="rate">From US$15/hr</p>
+        <p>Graphic design, layout, presentation decks, simple brand work, and web or app interface design.</p>
+        <a class="ask" href="#request" data-category="design">Request design work</a>
+      </article>
+      <article class="cat" id="writing">
+        <h3>Looking for a writing or translation professional?</h3>
+        <p class="rate">From US$12/hr</p>
+        <p>Web and product copy, articles, listings, and translation, including English and Chinese. We quote by the job when a word count is a better fit than an hourly rate.</p>
+        <a class="ask" href="#request" data-category="writing">Request writing or translation</a>
+      </article>
+      <article class="cat" id="admin">
+        <h3>Looking for an admin or virtual assistant?</h3>
+        <p class="rate">From US$10/hr</p>
+        <p>Inbox and calendar help, research, data entry, and other remote admin. This starting rate sits in line with typical posted admin rates, not well under them.</p>
+        <a class="ask" href="#request" data-category="admin">Request admin support</a>
+      </article>
+      <article class="cat" id="marketing">
+        <h3>Looking for a marketing professional?</h3>
+        <p class="rate">From US$12/hr</p>
+        <p>Listing copy, social posts and captions, basic campaign setup, and other remote marketing support. We don’t run ads in your accounts unless the quote says so.</p>
+        <a class="ask" href="#request" data-category="marketing">Request marketing work</a>
+      </article>
+      <article class="cat" id="video">
+        <h3>Looking for a video professional?</h3>
+        <p class="rate">From US$15/hr</p>
+        <p>Editing, captions, and short promotional cuts from footage you already have the rights to. A short video is often quoted as a fixed job rather than by the hour.</p>
+        <a class="ask" href="#request" data-category="video">Request video work</a>
+      </article>
+    </div>
+    <p class="src">The “often well under typical posted marketplace rates” line refers to development, design, and writing. In a sample of hourly Upwork jobs posted 11 October to 9 November 2026, the median posted midpoint was US$25/hr for web, mobile and software development, US$22.50/hr for design and creative, and US$25/hr for writing. Admin support sat at US$10/hr, which is why we don’t use that line on the admin card. Source: <a href="https://www.upsight.fyi/blog/upwork-hourly-rates-by-category-2026">Upsight, Upwork hourly rates by category (2026)</a>. We are not affiliated with Upwork.</p>
+
+    <h2 id="how">How it works</h2>
+    <ol class="steps">
+      <li>Send the form. Pick a category or describe the job, and include a deadline if you have one.</li>
+      <li>We reply by email with a written scope and a price — hourly or fixed — or we decline. There is no fee for a declined request.</li>
+      <li>If you accept, you pay the quoted amount. The A$50 cash voucher comes off your first job. Then we do the work and send it back.</li>
+    </ol>
+    <p>We are a small studio. If we use a contractor for part of a job, the quote and the delivery still come from us. Payment is by card, through a payment link we send after you accept the quote. If that link isn’t ready yet, we’ll say so in the reply and we won’t ask you to pay until it is.</p>
+
+    <h2 id="request">Request a job</h2>
+    <form action="https://formsubmit.co/7f1a1758cb43c85a47bc56ef2145bf67" method="POST">
+      <input type="hidden" name="_subject" value="NeedPros job request">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://todanley.github.io/needpros/thanks.html">
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
+      <input type="hidden" id="utm_source" name="utm_source" value="">
+      <input type="hidden" id="utm_medium" name="utm_medium" value="">
+      <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
+      <input type="hidden" id="utm_content" name="utm_content" value="">
+      <input type="hidden" id="landing_section" name="landing_section" value="">
+
+      <label for="name">Name <span class="hint">(optional)</span></label>
+      <input type="text" id="name" name="name" autocomplete="name">
+
+      <label for="email">Work email</label>
+      <input type="email" id="email" name="email" required autocomplete="email">
+      <input type="hidden" name="_replyto" value="">
+
+      <label for="category">Category</label>
+      <select id="category" name="category" required>
+        <option value="" selected disabled>Choose one</option>
+        <option value="coding">Coding / development</option>
+        <option value="design">Design</option>
+        <option value="writing">Writing or translation</option>
+        <option value="admin">Admin / virtual assistant</option>
+        <option value="marketing">Marketing</option>
+        <option value="video">Video</option>
+        <option value="other">Something else — please quote</option>
+      </select>
+
+      <label for="deadline">Deadline <span class="hint">(optional)</span></label>
+      <input type="text" id="deadline" name="deadline" placeholder="e.g. 4 December 2026, or ‘no set date’">
+
+      <label for="budget">Budget range <span class="hint">(optional)</span></label>
+      <input type="text" id="budget" name="budget" placeholder="A rough figure helps us quote faster">
+
+      <label for="brief">The brief</label>
+      <textarea id="brief" name="brief" required placeholder="What you need, any links or files you’ll send next, and anything we should avoid."></textarea>
+
+      <p class="fine">By sending this form you agree we may email you about this request. We don’t sell your details. Don’t put passwords or card numbers in the form.</p>
+      <button type="submit">Send the request</button>
+    </form>
+
+    <h2 id="faq">FAQ</h2>
+    <div class="faq">
+      <details>
+        <summary>Who does the work?</summary>
+        <p>A small studio. We are not a public board of named freelancers. If we need a contractor for part of a job, the quote and the delivery still come from us.</p>
+      </details>
+      <details>
+        <summary>Are you the cheapest option?</summary>
+        <p>We don’t claim that. We offer low starting rates, and in development, design, and writing those rates are often well under typical posted marketplace figures we checked in late 2026. Admin support is priced from US$10/hr, which is around the usual posted level for that work, not well under it. The quote for your brief is the price that matters.</p>
+      </details>
+      <details>
+        <summary>How does the A$50 cash voucher work?</summary>
+        <p>Every new member gets an A$50 cash voucher, used against their first job. One voucher per new customer. We’ll show it on the quote. It is not redeemable for cash, and you can’t transfer it.</p>
+      </details>
+      <details>
+        <summary>How do I pay?</summary>
+        <p>After you accept a written quote, we send a card payment link for that amount. We don’t take payment before the scope is agreed. If our payment account is still being set up, we’ll tell you in the reply rather than invent another method.</p>
+      </details>
+      <details>
+        <summary>What currency are the rates in?</summary>
+        <p>Starting hourly rates are in US dollars, which is how most remote marketplaces quote. The welcome voucher is in Australian dollars. Quotes can be issued in AUD or USD; we’ll say which on the quote. We are not GST-registered, so GST is not added.</p>
+      </details>
+      <details>
+        <summary>What won’t you take?</summary>
+        <p>In-person local tasks (the kind often posted on local task apps). Writing, completing, or submitting schoolwork, exams, or hiring take-home tests. Videos or files you don’t have the right to use. Promises of sales, search rank, or app-store placement.</p>
+      </details>
+      <details>
+        <summary>Do you have reviews on this site?</summary>
+        <p>Not yet. We won’t invent reviews, ratings, or client stories.</p>
+      </details>
+      <details>
+        <summary>How do I contact you?</summary>
+        <p>Use the form on this page. We don’t publish a phone number.</p>
+      </details>
+    </div>
+  </main>
+  <footer>
+    <div class="wrap">
+      <p>NeedPros is a trading name of Z1 NEXUS, ABN 81 685 156 914, Australia.</p>
+      <p>Starting hourly rates are in USD. The welcome voucher is in AUD. We are not GST-registered, so GST is not added. This site does not display reviews we have not received from real clients. We are not affiliated with Upwork or Airtasker.</p>
+      <p>© 2026 Z1 NEXUS. Use the form above to reach us.</p>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content"];
+      keys.forEach(function (k) {
+        var v = params.get(k);
+        if (v) sessionStorage.setItem("np_" + k, v);
+        var saved = sessionStorage.getItem("np_" + k) || "";
+        var field = document.getElementById(k);
+        if (field) field.value = saved;
+      });
+
+      var hash = (window.location.hash || "").replace("#", "");
+      var category = params.get("category") || params.get("utm_content") || hash;
+      var allowed = { coding: 1, design: 1, writing: 1, admin: 1, marketing: 1, video: 1, other: 1 };
+      var select = document.getElementById("category");
+      var sectionField = document.getElementById("landing_section");
+      if (category && allowed[category] && select) {
+        select.value = category;
+        if (sectionField) sectionField.value = category;
+      } else if (sectionField && hash) {
+        sectionField.value = hash;
+      }
+
+      var email = document.getElementById("email");
+      var reply = document.querySelector("input[name='_replyto']");
+      function sync() { if (email && reply) reply.value = email.value; }
+      if (email) email.addEventListener("input", sync);
+      sync();
+
+      document.querySelectorAll("a.ask[data-category]").forEach(function (a) {
+        a.addEventListener("click", function () {
+          var cat = a.getAttribute("data-category");
+          if (select && allowed[cat]) select.value = cat;
+          if (sectionField) sectionField.value = cat;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
