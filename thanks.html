@@ -20,6 +20,32 @@
     img { height: 36px; width: auto; display: block; margin-bottom: 1.6rem; }
     h1 { font-family: Palatino, "Palatino Linotype", "Iowan Old Style", Georgia, serif; font-size: 2rem; font-weight: 600; }
     a { color: #1B3152; }
+    .intent { margin: 1.6rem 0 1.4rem; }
+    .intent .prompt { margin: 0 0 0.75rem; font-weight: 600; }
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      max-width: 22rem;
+    }
+    .choices button {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 100%;
+      min-height: 3rem;
+      padding: 0.7rem 1rem;
+      font: inherit;
+      font-weight: 600;
+      color: #1B3152;
+      background: #fffdf8;
+      border: 1px solid #1B3152;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .choices button:hover { filter: brightness(0.98); background: #f3efe6; }
+    .choices button:focus { outline: 2px solid #162033; outline-offset: 2px; }
+    .choices button:disabled { cursor: default; opacity: 0.65; }
+    .done { margin: 1.6rem 0 1.4rem; font-weight: 600; }
   </style>
 </head>
 <body>
@@ -27,8 +53,116 @@
     <a href="./"><img src="assets/needpros-lockup.svg" width="140" height="36" alt="NeedPros"></a>
     <h1>We’ve got your email.</h1>
     <p>We’ll apply the $50 new-member voucher to your first job, and we’ll email you to confirm. When you’re ready, tell us what you need and we’ll follow up with a written quote, or we’ll tell you we can’t take the job.</p>
+    <div class="intent" id="intent-prompt">
+      <p class="prompt">One quick tap:</p>
+      <div class="choices">
+        <button type="button" data-intent="hire">I want to hire a pro</button>
+        <button type="button" data-intent="work">I’m looking for work</button>
+      </div>
+    </div>
+    <p class="done" id="intent-done" hidden>Thanks — noted.</p>
     <p>If you don’t hear back within two business days, check your spam folder for mail from NeedPros, or claim the credit again.</p>
     <p><a href="./">Back to NeedPros</a></p>
   </main>
+  <script>
+    (function () {
+      var ENDPOINT = "https://formsubmit.co/ajax/7f1a1758cb43c85a47bc56ef2145bf67";
+      var FALLBACK = "https://formsubmit.co/7f1a1758cb43c85a47bc56ef2145bf67";
+      var BRAND = "NeedPros";
+      var VARIANT = "A";
+      var PREFIX = "np_";
+
+      function storeGet(key) {
+        try { return sessionStorage.getItem(PREFIX + key) || localStorage.getItem(PREFIX + key) || ""; }
+        catch (e) { return ""; }
+      }
+
+      function readEmail() {
+        var params = new URLSearchParams(window.location.search);
+        return (params.get("email") || storeGet("claim_email") || "").trim();
+      }
+
+      function readField(name) {
+        var params = new URLSearchParams(window.location.search);
+        return (params.get(name) || storeGet(name) || "").trim();
+      }
+
+      function showThanks() {
+        var prompt = document.getElementById("intent-prompt");
+        var confirm = document.getElementById("intent-done");
+        if (prompt) prompt.hidden = true;
+        if (confirm) confirm.hidden = false;
+      }
+
+      function fallbackPost(payload) {
+        var iframe = document.createElement("iframe");
+        iframe.name = "intent_fallback";
+        iframe.setAttribute("title", "Intent fallback");
+        iframe.style.display = "none";
+        document.body.appendChild(iframe);
+        var form = document.createElement("form");
+        form.method = "POST";
+        form.action = FALLBACK;
+        form.target = "intent_fallback";
+        form.style.display = "none";
+        Object.keys(payload).forEach(function (k) {
+          var input = document.createElement("input");
+          input.type = "hidden";
+          input.name = k;
+          input.value = payload[k] == null ? "" : String(payload[k]);
+          form.appendChild(input);
+        });
+        document.body.appendChild(form);
+        form.submit();
+      }
+
+      function sendIntent(intent) {
+        var email = readEmail();
+        var payload = {
+          _subject: "Intent: " + intent + " (" + BRAND + " " + VARIANT + ")",
+          _template: "table",
+          _captcha: "false",
+          intent: intent,
+          email: email,
+          variant: VARIANT,
+          landing_variant: VARIANT,
+          brand: BRAND,
+          utm_source: readField("utm_source"),
+          utm_medium: readField("utm_medium"),
+          utm_campaign: readField("utm_campaign"),
+          utm_content: readField("utm_content")
+        };
+        if (email) payload._replyto = email;
+
+        var buttons = document.querySelectorAll("[data-intent]");
+        buttons.forEach(function (b) { b.disabled = true; });
+
+        fetch(ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        }).then(function (res) {
+          if (!res.ok) throw new Error("bad status");
+          return res.json().catch(function () { return {}; });
+        }).then(function () {
+          try { sessionStorage.setItem(PREFIX + "intent", intent); } catch (e) {}
+          showThanks();
+        }).catch(function () {
+          fallbackPost(payload);
+          try { sessionStorage.setItem(PREFIX + "intent", intent); } catch (e) {}
+          showThanks();
+        });
+      }
+
+      document.querySelectorAll("[data-intent]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          sendIntent(btn.getAttribute("data-intent"));
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

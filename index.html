@@ -329,6 +329,27 @@
       function sync() { if (email && reply) reply.value = email.value; }
       if (email) email.addEventListener("input", sync);
       sync();
+      var form = document.getElementById("request");
+      if (form) {
+        form.addEventListener("submit", function () {
+          var emailVal = email && email.value ? email.value.trim() : "";
+          try {
+            if (emailVal) {
+              sessionStorage.setItem("np_claim_email", emailVal);
+              localStorage.setItem("np_claim_email", emailVal);
+            }
+          } catch (e) {}
+          var next = form.querySelector("input[name='_next']");
+          if (next && emailVal) {
+            try {
+              var u = new URL(next.getAttribute("value") || next.value);
+              u.searchParams.set("email", emailVal);
+              next.value = u.toString();
+            } catch (err) {}
+          }
+        });
+      }
+
 
       document.querySelectorAll("a.ask[data-category]").forEach(function (a) {
         a.addEventListener("click", function () {
